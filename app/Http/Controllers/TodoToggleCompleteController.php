@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todo;
-use App\Models\DTO\TodoData;
 use App\Actions\TodoToggleComplete;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\TodoToggleCompleteRequest;
+use App\Models\DTO\TodoData;
+use App\Models\Todo;
+use Illuminate\Http\RedirectResponse;
 
 class TodoToggleCompleteController extends Controller
 {

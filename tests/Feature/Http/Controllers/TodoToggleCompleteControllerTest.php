@@ -23,7 +23,7 @@ class TodoToggleCompleteControllerTest extends TestCase
 
         $this->assertDatabaseHas('todos', [
             'id' => $todo->id,
-            'is_complete' => 1
+            'is_complete' => 1,
         ]);
     }
 
@@ -40,8 +40,7 @@ class TodoToggleCompleteControllerTest extends TestCase
 
         $this->assertDatabaseHas('todos', [
             'id' => $todo->id,
-            'is_complete' => 0
+            'is_complete' => 0,
         ]);
     }
-
 }

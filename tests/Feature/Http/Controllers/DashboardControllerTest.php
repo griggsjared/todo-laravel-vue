@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use Tests\TestCase;
-use App\Models\Todo;
 use App\Models\Category;
-use Inertia\Testing\AssertableInertia as Assert;
+use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\AssertableInertia as Assert;
+use Tests\TestCase;
 
 class DashboardControllerTest extends TestCase
 {

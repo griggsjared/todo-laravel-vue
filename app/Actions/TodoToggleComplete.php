@@ -2,16 +2,14 @@
 
 namespace App\Actions;
 
-use App\Models\Todo;
-use App\Actions\TodoUpsert;
 use App\Models\DTO\TodoData;
+use App\Models\Todo;
 
 class TodoToggleComplete
 {
-
     public function __construct(
         private TodoUpsert $upsert
-    ){
+    ) {
     }
 
     public function handle(TodoData $data, bool $complete): Todo
