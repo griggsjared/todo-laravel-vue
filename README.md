@@ -1,4 +1,4 @@
-# PHP/Laravel + Typescript/Vue/Inertia App
+# PHP/Laravel + Typescript/Vue/Inertia Todo List App
 
 Requires composer 2.0+, php 8.1+, and node 14+.
 
