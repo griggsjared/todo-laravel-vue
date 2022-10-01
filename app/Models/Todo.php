@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUuid;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Dyrynda\Database\Casts\EfficientUuid;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Todo extends Model
 {
@@ -25,6 +26,7 @@ class Todo extends Model
      */
     protected $casts = [
         'is_complete' => 'boolean',
+        'uuid' => EfficientUuid::class,
     ];
 
     /**
