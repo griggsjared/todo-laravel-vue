@@ -5,8 +5,12 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 import { importPageComponent } from '@/scripts/utils/import-page-component'
 
+
 createInertiaApp({
-	resolve: (name : string)  => importPageComponent(name, import.meta.glob('../vue/pages/**/*.vue')),
+	resolve: (name : string)  => importPageComponent(
+    `../vue/pages/${name}.vue`,
+    import.meta.glob('../vue/pages/**/*.vue')
+  ),
   title: () => 'TODO App',
 	setup({ el, app, props, plugin }) {
 		createApp({ render: () => h(app, props) })

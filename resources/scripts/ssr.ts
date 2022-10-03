@@ -7,7 +7,10 @@ import createServer from '@inertiajs/server'
 createServer(page => createInertiaApp({
   page,
   render: renderToString,
-  resolve: (name : string) => importPageComponent(name, import.meta.glob('../vue/pages/**/*.vue')),
+  resolve: (name : string)  => importPageComponent(
+    `../vue/pages/${name}.vue`,
+    import.meta.glob('../vue/pages/**/*.vue')
+  ),
   title: () => 'TODO App',
   setup: ({ app, props, plugin: inertia }) => {
     return createSSRApp({ render: () => h(app, props) })
