@@ -8,9 +8,9 @@ use App\View\DTO\CategoryData;
 use App\View\DTO\TodoData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
+use Spatie\LaravelData\DataCollection;
 
 class DashboardController extends Controller
 {
@@ -33,30 +33,29 @@ class DashboardController extends Controller
     }
 
     /**
-     * @return Collection<TodoData>
+     * @return DataCollection<TodoData>
      */
-    private function todos(?string $categoryUuid): Collection
+    private function todos(?string $categoryUuid): DataCollection
     {
         $categoryData = $categoryUuid ? $this->category($categoryUuid) : null;
 
-        return Todo::query()
-            ->when($categoryData, function (Builder $t) use ($categoryData): void {
-                $t->whereHas('category', function (Builder $c) use ($categoryData): void {
-                    $c->whereUuid($categoryData->uuid);
-                });
-            })
-            ->with('category')
-            ->get()
-            ->map(fn (Todo $todo): TodoData => TodoData::from($todo));
+        return TodoData::collection(
+            Todo::query()
+                ->when($categoryData, function (Builder $t) use ($categoryData): void {
+                    $t->whereHas('category', function (Builder $c) use ($categoryData): void {
+                        $c->whereUuid($categoryData->uuid);
+                    });
+                })
+                ->with('category')
+                ->get()
+        );
     }
 
     /**
-     * @return Collection<CategoryData>
+     * @return DataCollection<CategoryData>
      */
-    private function categories(): Collection
+    private function categories(): DataCollection
     {
-        return Category::query()
-            ->get()
-            ->map(fn (Category $category): CategoryData => CategoryData::from($category));
+        return CategoryData::collection(Category::all());
     }
 }

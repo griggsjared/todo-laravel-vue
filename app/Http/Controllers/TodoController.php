@@ -13,9 +13,15 @@ use Illuminate\Http\RedirectResponse;
 
 class TodoController extends Controller
 {
-    public function store(TodoStoreRequest $request, TodoUpsert $action): RedirectResponse
+    public function __construct(
+        private TodoUpsert $upsert,
+        private TodoDelete $delete,
+    ) {
+    }
+
+    public function store(TodoStoreRequest $request): RedirectResponse
     {
-        $created = $action->handle(TodoData::from([
+        $this->upsert->handle(TodoData::from([
             ...$request->validated(),
             'category' => Category::whereUuid($request->category)->first(),
         ]));
@@ -25,9 +31,9 @@ class TodoController extends Controller
         ]);
     }
 
-    public function update(Todo $todo, TodoUpdateRequest $request, TodoUpsert $action): RedirectResponse
+    public function update(Todo $todo, TodoUpdateRequest $request): RedirectResponse
     {
-        $updated = $action->handle(
+        $this->upsert->handle(
             TodoData::from([
                 ...$todo->toArray(),
                 ...$request->validated(),
@@ -40,11 +46,9 @@ class TodoController extends Controller
         ]);
     }
 
-    public function destroy(Todo $todo, TodoDelete $action): RedirectResponse
+    public function destroy(Todo $todo): RedirectResponse
     {
-        $deleted = $action->handle(
-            TodoData::from($todo)
-        );
+        $this->delete->handle(TodoData::from($todo));
 
         return redirect()->back()->withMessages([
             __('Todo has been deleted.'),

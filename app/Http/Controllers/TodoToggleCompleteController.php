@@ -10,9 +10,14 @@ use Illuminate\Http\RedirectResponse;
 
 class TodoToggleCompleteController extends Controller
 {
-    public function __invoke(TodoToggleCompleteRequest $request, Todo $todo, TodoToggleComplete $action): RedirectResponse
+    public function __construct(
+        private TodoToggleComplete $toggleComplete
+    ) {
+    }
+
+    public function __invoke(TodoToggleCompleteRequest $request, Todo $todo): RedirectResponse
     {
-        $action->handle(
+        $this->toggleComplete->handle(
             TodoData::from($todo),
             $request->is_complete
         );

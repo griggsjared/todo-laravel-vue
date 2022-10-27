@@ -12,18 +12,24 @@ use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
-    public function store(CategoryStoreRequest $request, CategoryUpsert $action): RedirectResponse
+    public function __construct(
+        private CategoryUpsert $upsert,
+        private CategoryDelete $delete,
+    ) {
+    }
+
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
-        $created = $action->handle(CategoryData::from($request->validated()));
+        $this->upsert->handle(CategoryData::from($request->validated()));
 
         return redirect()->back()->withMessages([
             __('Category has been created.'),
         ]);
     }
 
-    public function update(Category $category, CategoryUpdateRequest $request, CategoryUpsert $action): RedirectResponse
+    public function update(Category $category, CategoryUpdateRequest $request): RedirectResponse
     {
-        $updated = $action->handle(
+        $this->upsert->handle(
             CategoryData::from([
                 ...$category->toArray(),
                 ...$request->validated(),
@@ -35,9 +41,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function destroy(Category $category, CategoryDelete $action): RedirectResponse
+    public function destroy(Category $category): RedirectResponse
     {
-        $deleted = $action->handle(
+        $this->delete->handle(
             CategoryData::from($category)
         );
 
