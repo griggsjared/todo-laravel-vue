@@ -13,13 +13,11 @@ class TodoToggleComplete
 
     public function handle(TodoData $data, bool $complete): TodoData
     {
-        $todo = $this->upsert->handle(
+        return $this->upsert->handle(
             TodoData::from([
                 ...$data->toArray(),
                 'is_complete' => $complete,
             ])
         );
-
-        return TodoData::from($todo);
     }
 }
