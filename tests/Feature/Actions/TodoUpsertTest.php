@@ -116,4 +116,23 @@ class TodoUpsertTest extends TestCase
 
         $this->assertNull($todo->category);
     }
+
+    /** @test */
+    public function it_creates_a_category_if_it_does_not_exist()
+    {
+        $todo = Todo::factory()->create();
+
+        $data = TodoData::from([
+            ...$todo->toArray(),
+            'category' => CategoryData::from([
+                'name' => 'New Category',
+            ]),
+        ]);
+
+        app(TodoUpsert::class)->handle($data);
+
+        $todo->refresh();
+
+        $this->assertEquals('New Category', $todo->category->name);
+    }
 }
