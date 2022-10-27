@@ -7,7 +7,7 @@ use App\Models\Todo;
 
 class TodoUpsert
 {
-    public function handle(TodoData $data): Todo
+    public function handle(TodoData $data): TodoData
     {
         $todo = Todo::updateOrCreate(
             ['id' => $data->id],
@@ -26,6 +26,6 @@ class TodoUpsert
 
         $todo->save();
 
-        return $todo;
+        return TodoData::from($todo);
     }
 }

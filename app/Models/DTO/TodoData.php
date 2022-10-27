@@ -19,7 +19,7 @@ class TodoData extends Data
     {
         return self::from([
             ...$todo->toArray(),
-            'category' => $todo->category ? CategoryData::from($todo->category->toArray()) : null,
+            'category' => $todo->category ? CategoryData::from($todo->category) : null,
         ]);
     }
 }

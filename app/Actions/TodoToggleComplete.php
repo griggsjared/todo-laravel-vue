@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Models\DTO\TodoData;
-use App\Models\Todo;
 
 class TodoToggleComplete
 {
@@ -12,7 +11,7 @@ class TodoToggleComplete
     ) {
     }
 
-    public function handle(TodoData $data, bool $complete): Todo
+    public function handle(TodoData $data, bool $complete): TodoData
     {
         $todo = $this->upsert->handle(
             TodoData::from([
@@ -21,6 +20,6 @@ class TodoToggleComplete
             ])
         );
 
-        return $todo;
+        return TodoData::from($todo);
     }
 }

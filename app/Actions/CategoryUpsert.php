@@ -7,13 +7,13 @@ use App\Models\DTO\CategoryData;
 
 class CategoryUpsert
 {
-    public function handle(CategoryData $data): Category
+    public function handle(CategoryData $data): CategoryData
     {
         $category = Category::updateOrCreate(
             ['id' => $data->id],
             ['name' => $data->name]
         );
 
-        return $category;
+        return CategoryData::from($category);
     }
 }

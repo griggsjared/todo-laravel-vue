@@ -21,9 +21,10 @@ class TodoUpsertTest extends TestCase
             'name' => 'Walk the dog',
         ]);
 
-        $todo = app(TodoUpsert::class)->handle($data);
+        $data = app(TodoUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Todo::class, $todo);
+        $todo = Todo::find($data->id);
+
         $this->assertEquals($data->name, $todo->name);
     }
 
@@ -37,11 +38,11 @@ class TodoUpsertTest extends TestCase
             'name' => 'Walk the dog again',
         ]);
 
-        $updatedTodo = app(TodoUpsert::class)->handle($data);
+        app(TodoUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertEquals($data->name, $updatedTodo->name);
-        $this->assertEquals($todo->id, $updatedTodo->id);
+        $todo->refresh();
+
+        $this->assertEquals($data->name, $todo->name);
     }
 
     /** @test */
@@ -54,11 +55,11 @@ class TodoUpsertTest extends TestCase
             'is_complete' => true,
         ]);
 
-        $updatedTodo = app(TodoUpsert::class)->handle($data);
+        app(TodoUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertTrue($updatedTodo->is_complete);
-        $this->assertEquals($todo->id, $updatedTodo->id);
+        $todo->refresh();
+
+        $this->assertTrue($todo->is_complete);
     }
 
     /** @test */
@@ -71,11 +72,11 @@ class TodoUpsertTest extends TestCase
             'is_complete' => false,
         ]);
 
-        $updatedTodo = app(TodoUpsert::class)->handle($data);
+        $data = app(TodoUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertFalse($updatedTodo->is_complete);
-        $this->assertEquals($todo->id, $updatedTodo->id);
+        $todo->refresh();
+
+        $this->assertFalse($todo->is_complete);
     }
 
     /** @test */
@@ -90,11 +91,11 @@ class TodoUpsertTest extends TestCase
             'category' => CategoryData::from($catoegory),
         ]);
 
-        $updatedTodo = app(TodoUpsert::class)->handle($data);
+        app(TodoUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertEquals($todo->id, $updatedTodo->id);
-        $this->assertEquals($catoegory->id, $updatedTodo->category->id);
+        $todo->refresh();
+
+        $this->assertEquals($catoegory->id, $todo->category->id);
     }
 
     /** @test */
@@ -109,10 +110,10 @@ class TodoUpsertTest extends TestCase
             'category' => null,
         ]);
 
-        $updatedTodo = app(TodoUpsert::class)->handle($data);
+        app(TodoUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertEquals($todo->id, $updatedTodo->id);
-        $this->assertNull($updatedTodo->category);
+        $todo->refresh();
+
+        $this->assertNull($todo->category);
     }
 }

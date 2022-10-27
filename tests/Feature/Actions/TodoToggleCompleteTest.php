@@ -19,11 +19,11 @@ class TodoToggleCompleteTest extends TestCase
 
         $data = TodoData::from($todo);
 
-        $updatedTodo = app(TodoToggleComplete::class)->handle($data, true);
+        app(TodoToggleComplete::class)->handle($data, true);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertTrue($updatedTodo->is_complete);
-        $this->assertEquals($todo->id, $updatedTodo->id);
+        $todo->refresh();
+
+        $this->assertTrue($todo->is_complete);
     }
 
     /** @test */
@@ -33,10 +33,10 @@ class TodoToggleCompleteTest extends TestCase
 
         $data = TodoData::from($todo);
 
-        $updatedTodo = app(TodoToggleComplete::class)->handle($data, false);
+        app(TodoToggleComplete::class)->handle($data, false);
 
-        $this->assertInstanceOf(Todo::class, $updatedTodo);
-        $this->assertFalse($updatedTodo->is_complete);
-        $this->assertEquals($todo->id, $updatedTodo->id);
+        $todo->refresh();
+
+        $this->assertFalse($todo->is_complete);
     }
 }

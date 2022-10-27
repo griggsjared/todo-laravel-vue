@@ -7,14 +7,16 @@ use App\Models\Todo;
 
 class TodoDelete
 {
-    public function handle(TodoData $data): bool
+    public function handle(TodoData $data): ?TodoData
     {
         $todo = Todo::find($data->id);
 
         if (! $todo) {
-            return false;
+            return null;
         }
 
-        return $todo->delete();
+        $todo->delete();
+
+        return TodoData::from($todo);
     }
 }

@@ -17,13 +17,12 @@ class TodoDeleteTest extends TestCase
     {
         $todo = Todo::factory()->create();
 
-        $deleted = app(TodoDelete::class)->handle(
+        app(TodoDelete::class)->handle(
             TodoData::from($todo)
         );
 
         $todo = Todo::where('id', $todo->id)->first();
 
-        $this->assertTrue($deleted);
         $this->assertNull($todo);
     }
 }

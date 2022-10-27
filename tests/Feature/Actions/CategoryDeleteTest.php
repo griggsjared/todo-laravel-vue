@@ -13,17 +13,16 @@ class CategoryDeleteTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_deleted_category()
+    public function it_deleted_the_category()
     {
         $category = Category::factory()->create();
 
-        $deleted = app(CategoryDelete::class)->handle(
+        app(CategoryDelete::class)->handle(
             CategoryData::from($category)
         );
 
-        $category = Category::whereUuid($category->uuid)->first();
+        $category = Category::find($category->id);
 
-        $this->assertTrue($deleted);
         $this->assertNull($category);
     }
 }

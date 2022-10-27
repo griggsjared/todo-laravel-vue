@@ -7,14 +7,16 @@ use App\Models\DTO\CategoryData;
 
 class CategoryDelete
 {
-    public function handle(CategoryData $data): bool
+    public function handle(CategoryData $data): ?CategoryData
     {
         $category = Category::find($data->id);
 
         if (! $category) {
-            return false;
+            return null;
         }
 
-        return $category->delete();
+        $category->delete();
+
+        return CategoryData::from($category);
     }
 }

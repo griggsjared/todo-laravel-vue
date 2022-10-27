@@ -19,7 +19,9 @@ class CategoryUpsertTest extends TestCase
             'name' => 'Test Category',
         ]);
 
-        $category = app(CategoryUpsert::class)->handle($data);
+        $data = app(CategoryUpsert::class)->handle($data);
+
+        $category = Category::find($data->id);
 
         $this->assertInstanceOf(Category::class, $category);
         $this->assertEquals($data->name, $category->name);
@@ -35,10 +37,12 @@ class CategoryUpsertTest extends TestCase
             'name' => 'Updated Category',
         ]);
 
-        $updatedCategory = app(CategoryUpsert::class)->handle($data);
+        $data = app(CategoryUpsert::class)->handle($data);
 
-        $this->assertInstanceOf(Category::class, $updatedCategory);
-        $this->assertEquals($data->name, $updatedCategory->name);
-        $this->assertEquals($category->id, $updatedCategory->id);
+        $category->refresh();
+
+        $this->assertInstanceOf(Category::class, $category);
+        $this->assertEquals($data->name, $category->name);
+        $this->assertEquals($category->id, $category->id);
     }
 }
