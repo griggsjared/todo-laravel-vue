@@ -22,12 +22,22 @@ To run tests:
 php artisan test
 ```
 
-To run code style test:
+To run php code style test:
 ```
 ./vendor/bin/pint --test
 ```
 
-To run code style fix:
+To run php code style fix:
 ```
 ./vendor/bin/pint
+```
+
+To run js/ts code style test:
+```
+npx prettier --check .
+```
+
+To run js/ts code style fix:
+```
+npx prettier --write .
 ```

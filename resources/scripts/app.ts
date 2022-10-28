@@ -1,30 +1,28 @@
-import '../css/app.css'
+import '../css/app.css';
 
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-import { InertiaProgress } from '@inertiajs/progress'
-import { importPageComponent } from '@/scripts/utils/import-page-component'
-
+import { createApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/inertia-vue3';
+import { InertiaProgress } from '@inertiajs/progress';
+import { importPageComponent } from '@/scripts/utils/import-page-component';
 
 createInertiaApp({
-	resolve: (name : string)  => importPageComponent(
-    `../vue/pages/${name}.vue`,
-    import.meta.glob('../vue/pages/**/*.vue')
-  ),
+  resolve: (name: string) =>
+    importPageComponent(
+      `../vue/pages/${name}.vue`,
+      import.meta.glob('../vue/pages/**/*.vue')
+    ),
   title: () => 'TODO App',
-	setup({ el, app, props, plugin }) {
-		createApp({ render: () => h(app, props) })
-			.use(plugin)
-			.mount(el)
-	},
-})
+  setup({ el, app, props, plugin }) {
+    createApp({ render: () => h(app, props) })
+      .use(plugin)
+      .mount(el);
+  },
+});
 
 InertiaProgress.init({
   delay: 100,
   color: '#3b5ed1',
-  includeCSS: true
-})
+  includeCSS: true,
+});
 
-import.meta.glob([
-  '../images/**',
-]);
+import.meta.glob(['../images/**']);

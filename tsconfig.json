@@ -10,34 +10,16 @@
     "esModuleInterop": true,
     "allowJs": false,
     "skipLibCheck": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "vite/client",
-      "node"
-    ],
-    "typeRoots": [
-      "./node_modules/@types/"
-    ],
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "node"],
+    "typeRoots": ["./node_modules/@types/"],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "resources/*"
-      ],
-      "@components/*": [
-        "resources/vue/components/*"
-      ],
-      "@pages/*": [
-        "resources/vue/pages/*"
-      ],
-      "@layouts/*": [
-        "resources/vue/layouts/*"
-      ]
+      "@/*": ["resources/*"],
+      "@components/*": ["resources/vue/components/*"],
+      "@pages/*": ["resources/vue/pages/*"],
+      "@layouts/*": ["resources/vue/layouts/*"]
     }
   },
-  "include": [
-    "resources/**/*"
-  ]
+  "include": ["resources/**/*"]
 }
