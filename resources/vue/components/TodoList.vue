@@ -2,13 +2,10 @@
   import type { ITodo } from '@/scripts/utils/types';
   import Icon from '@components/Icon.vue';
   import { Inertia } from '@inertiajs/inertia';
-  import { toRef } from 'vue';
 
   const props = defineProps<{
     todos: ITodo[];
   }>();
-
-  const todos = toRef(props, 'todos');
 
   const toggleComplete = (todo: ITodo) => {
     todo.is_complete = !todo.is_complete;
