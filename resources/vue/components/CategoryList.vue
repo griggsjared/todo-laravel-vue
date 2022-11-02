@@ -3,12 +3,17 @@
   import Icon from '@components/Icon.vue';
   import { Inertia } from '@inertiajs/inertia';
 
-  defineProps<{
+  const props = defineProps<{
     categories: ICategory[];
   }>();
 
   const remove = (category: ICategory) => {
-    Inertia.delete(`/categories/${category.uuid}`);
+    const index: number = props.categories.findIndex((c: ICategory) => c.uuid === c.uuid);
+    if (index > -1) {
+      props.categories.splice(index, 1);
+    }
+
+    Inertia.delete(`/categories/${category.uuid}`, { preserveScroll: true });
   };
 </script>
 

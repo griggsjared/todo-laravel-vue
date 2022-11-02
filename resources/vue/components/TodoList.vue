@@ -2,16 +2,21 @@
   import type { ITodo } from '@/scripts/utils/types';
   import Icon from '@components/Icon.vue';
   import { Inertia } from '@inertiajs/inertia';
+  import { toRef } from 'vue';
 
-  defineProps<{
+  const props = defineProps<{
     todos: ITodo[];
   }>();
 
+  const todos = toRef(props, 'todos');
+
   const toggleComplete = (todo: ITodo) => {
+    todo.is_complete = !todo.is_complete;
+
     Inertia.put(
       `/todos/${todo.uuid}/toggle-complete`,
       {
-        is_complete: !todo.is_complete,
+        is_complete: todo.is_complete,
       },
       {
         preserveScroll: true,
@@ -20,6 +25,10 @@
   };
 
   const remove = (todo: ITodo) => {
+    const index: number = props.todos.findIndex((t: ITodo) => t.uuid === todo.uuid);
+    if (index > -1) {
+      props.todos.splice(index, 1);
+    }
     Inertia.delete(`/todos/${todo.uuid}`, { preserveScroll: true });
   };
 </script>
