@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import type { ITodo } from '@/scripts/utils/types';
-  import { Inertia } from '@inertiajs/inertia';
   import Icon from '@components/Icon.vue';
+  import { Inertia } from '@inertiajs/inertia';
 
   defineProps<{
     todos: ITodo[];
@@ -20,9 +20,7 @@
   };
 
   const remove = (todo: ITodo) => {
-    Inertia.delete(`/todos/${todo.uuid}`, {
-      preserveScroll: true,
-    });
+    Inertia.delete(`/todos/${todo.uuid}`, { preserveScroll: true });
   };
 </script>
 
@@ -34,14 +32,8 @@
       class="flex items-start justify-between px-2 py-1 -mx-2 space-x-2 hover:bg-gray-lighter"
     >
       <span class="flex items-start justify-start space-x-2 shrink">
-        <button
-          type="button"
-          class="text-gray-base w-5 shrink-0 mt-0.5"
-          @click="toggleComplete(todo)"
-        >
-          <Icon
-            :name="todo.is_complete ? 'checkbox-checked' : 'checkbox-unchecked'"
-          />
+        <button type="button" class="text-gray-base w-5 shrink-0 mt-0.5" @click="toggleComplete(todo)">
+          <Icon :name="todo.is_complete ? 'checkbox-checked' : 'checkbox-unchecked'" />
         </button>
         <div
           class="text-lg font-medium"

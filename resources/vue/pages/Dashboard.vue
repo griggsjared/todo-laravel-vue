@@ -1,11 +1,10 @@
 <script lang="ts" setup>
   import type { ICategory, ITodo } from '@/scripts/utils/types';
-  import { Link } from '@inertiajs/inertia-vue3';
   import CategoryAdd from '@components/CategoryAdd.vue';
   import CategoryList from '@components/CategoryList.vue';
   import TodoAdd from '@components/TodoAdd.vue';
   import TodoList from '@components/TodoList.vue';
-  import Icon from '@components/Icon.vue';
+  import { Link } from '@inertiajs/inertia-vue3';
 
   const props = defineProps<{
     categories: ICategory[];
@@ -21,19 +20,12 @@
 </script>
 
 <template>
-  <div
-    class="w-full max-w-4xl p-6 mx-auto bg-white divide-y-2 rounded-lg sm:p-12 divide-gray-base"
-  >
+  <div class="w-full max-w-4xl p-6 mx-auto bg-white divide-y-2 rounded-lg sm:p-12 divide-gray-base">
     <div class="pb-6">
       <h1 class="mb-2 text-2xl font-medium uppercase">TODO List</h1>
-      <div
-        v-if="categories.length"
-        class="flex flex-wrap items-start justify-start py-2"
-      >
+      <div v-if="categories.length" class="flex flex-wrap items-start justify-start py-2">
         <span class="mr-1 shrink-0">Show Category:</span>
-        <ul
-          class="flex flex-wrap items-center justify-start divide-x divide-gray-dark"
-        >
+        <ul class="flex flex-wrap items-center justify-start divide-x divide-gray-dark">
           <li
             v-for="category in categories"
             :key="category.uuid"
@@ -43,9 +35,7 @@
               'text-black': isCurrentCategory(category),
             }"
           >
-            <Link :href="`/?category=${category.uuid}`">{{
-              category.name
-            }}</Link>
+            <Link :href="`/?category=${category.uuid}`">{{ category.name }}</Link>
           </li>
           <li
             class="pl-2 font-medium"

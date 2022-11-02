@@ -42,11 +42,7 @@
           class="block w-full border-none rounded-md shadow-inner bg-gray-lighter"
         >
           <option :value="null">Choose Category</option>
-          <option
-            v-for="category in categories"
-            :key="category.uuid"
-            :value="category.uuid"
-          >
+          <option v-for="category in categories" :key="category.uuid" :value="category.uuid">
             {{ category.name }}
           </option>
         </select>

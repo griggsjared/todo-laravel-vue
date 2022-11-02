@@ -3,11 +3,7 @@ const forms = require('@tailwindcss/forms');
 
 module.exports = {
   mode: 'jit',
-  content: [
-    './resources/views/**/*.blade.php',
-    './resources/scripts/**/*.js',
-    './resources/vue/**/*.vue',
-  ],
+  content: ['./resources/views/**/*.blade.php', './resources/scripts/**/*.js', './resources/vue/**/*.vue'],
   theme: {
     colors: {
       transparent: 'transparent',

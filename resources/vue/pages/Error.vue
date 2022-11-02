@@ -28,13 +28,9 @@
 
 <template>
   <div class="flex flex-col min-h-full pt-16 pb-12 bg-blue-dark">
-    <main
-      class="flex flex-col justify-center flex-grow w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"
-    >
+    <main class="flex flex-col justify-center flex-grow w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="text-center">
-        <h1
-          class="mt-2 text-4xl font-extrabold tracking-wide text-white text-gray-900 sm:text-5xl"
-        >
+        <h1 class="mt-2 text-4xl font-extrabold tracking-wide text-white text-gray-900 sm:text-5xl">
           {{ error.title }}
         </h1>
       </div>
