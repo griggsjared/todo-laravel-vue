@@ -8,7 +8,8 @@
   }>();
 
   const remove = (category: ICategory) => {
-    const index: number = props.categories.findIndex((c: ICategory) => c.uuid === c.uuid);
+    const index: number = props.categories.findIndex((c: ICategory) => c.uuid === category.uuid);
+
     if (index > -1) {
       props.categories.splice(index, 1);
     }
