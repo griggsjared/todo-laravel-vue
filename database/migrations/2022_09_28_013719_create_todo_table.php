@@ -14,9 +14,8 @@ return new class() extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
-            $table->efficientUuid('uuid')->unique();
-            $table->integer('category_id')->nullable()->index();
+            $table->uuid('id')->primary();
+            $table->uuid('category_id')->index()->nullable();
             $table->string('name');
             $table->boolean('is_complete')->default(false);
             $table->timestamps();

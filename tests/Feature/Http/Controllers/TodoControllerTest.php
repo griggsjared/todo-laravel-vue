@@ -18,7 +18,7 @@ class TodoControllerTest extends TestCase
 
         $this->post(route('todos.store'), [
             'name' => 'Todo one',
-            'category' => $category->uuid,
+            'category' => $category->id,
         ])
             ->assertRedirect('/')
             ->assertSessionHas('messages', [

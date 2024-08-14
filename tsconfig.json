@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "allowJs": false,
     "skipLibCheck": true,
+    "isolatedModules": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "node"],
     "typeRoots": ["./node_modules/@types/"],

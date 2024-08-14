@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-  import type { ITodo } from '@/scripts/utils/types';
+  import type { Todo } from '@/scripts/utils/types';
   import Icon from '@components/Icon.vue';
-  import { Inertia } from '@inertiajs/inertia';
+  import { router } from '@inertiajs/vue3';
 
   const props = defineProps<{
-    todos: ITodo[];
+    todos: Todo[];
   }>();
 
-  const toggleComplete = (todo: ITodo) => {
+  const toggleComplete = (todo: Todo) => {
     todo.is_complete = !todo.is_complete;
 
-    Inertia.put(
-      `/todos/${todo.uuid}/toggle-complete`,
+    router.put(
+      `/todos/${todo.id}/toggle-complete`,
       {
         is_complete: todo.is_complete,
       },
@@ -21,12 +21,12 @@
     );
   };
 
-  const remove = (todo: ITodo) => {
-    const index: number = props.todos.findIndex((t: ITodo) => t.uuid === todo.uuid);
+  const remove = (todo: Todo) => {
+    const index: number = props.todos.findIndex((t: Todo) => t.id === todo.id);
     if (index > -1) {
       props.todos.splice(index, 1);
     }
-    Inertia.delete(`/todos/${todo.uuid}`, { preserveScroll: true });
+    router.delete(`/todos/${todo.id}`, { preserveScroll: true });
   };
 </script>
 
@@ -34,7 +34,7 @@
   <ul v-if="todos.length">
     <li
       v-for="todo in todos"
-      :key="todo.uuid"
+      :key="todo.id"
       class="flex items-start justify-between px-2 py-1 -mx-2 space-x-2 hover:bg-gray-lighter"
     >
       <span class="flex items-start justify-start space-x-2 shrink">

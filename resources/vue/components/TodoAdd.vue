@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-  import type { ICategory } from '@/scripts/utils/types';
-  import { useForm } from '@inertiajs/inertia-vue3';
+  import type { Category } from '@/scripts/utils/types';
+  import { useForm } from '@inertiajs/vue3';
 
   defineProps<{
-    categories: ICategory[];
+    categories: Category[];
   }>();
 
   const form = useForm<{
@@ -42,7 +42,7 @@
           class="block w-full border-none rounded-md shadow-inner bg-gray-lighter"
         >
           <option :value="null">Choose Category</option>
-          <option v-for="category in categories" :key="category.uuid" :value="category.uuid">
+          <option v-for="category in categories" :key="category.id" :value="category.id">
             {{ category.name }}
           </option>
         </select>

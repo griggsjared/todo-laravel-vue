@@ -1,21 +1,10 @@
-import basicSsl from '@vitejs/plugin-basic-ssl';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import inertiaLayout from './resources/scripts/utils/inertia-layout';
 
 export default ({ mode }) => {
-  process.env = {
-    ...process.env,
-    ...loadEnv(mode, process.cwd()),
-  };
-
   return defineConfig({
-    server: {
-      port: process.env?.VITE_SERVER_PORT || 3000,
-      https: process.env?.VITE_SERVER_HTTPS == 'true' || false,
-      host: process.env.VITE_SERVER_HOST || 'localhost',
-    },
     plugins: [
       process.env?.VITE_SERVER_HTTPS == 'true' ? basicSsl() : {},
       inertiaLayout(),

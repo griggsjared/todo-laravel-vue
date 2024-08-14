@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
-use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 class TodoTest extends TestCase
@@ -19,23 +18,12 @@ class TodoTest extends TestCase
         $this->assertTrue(
             Schema::hasColumns('todos', [
                 'id',
-                'uuid',
                 'name',
                 'category_id',
                 'is_complete',
                 'created_at',
                 'updated_at',
             ])
-        );
-    }
-
-    /** @test */
-    public function it_has_valid_uuid()
-    {
-        $todo = Todo::factory()->create();
-
-        $this->assertTrue(
-            Uuid::isValid($todo->uuid)
         );
     }
 

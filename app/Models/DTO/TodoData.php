@@ -2,24 +2,17 @@
 
 namespace App\Models\DTO;
 
-use App\Models\Todo;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class TodoData extends Data
 {
     public function __construct(
-        public ?int $id,
+        #[Uuid]
+        public ?string $id,
         public string $name,
         public ?bool $is_complete,
-        public ?CategoryData $category
+        public Optional|CategoryData|null $category
     ) {
-    }
-
-    public static function fromModel(Todo $todo): self
-    {
-        return self::from([
-            ...$todo->toArray(),
-            'category' => $todo->category ? CategoryData::from($todo->category) : null,
-        ]);
     }
 }

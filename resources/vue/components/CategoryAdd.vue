@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { useForm } from '@inertiajs/inertia-vue3';
+  import { useForm } from '@inertiajs/vue3';
 
   const form = useForm<{
     name: string;

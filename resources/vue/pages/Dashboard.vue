@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-  import type { ICategory, ITodo } from '@/scripts/utils/types';
+  import type { Category, Todo } from '@/scripts/utils/types';
   import CategoryAdd from '@components/CategoryAdd.vue';
   import CategoryList from '@components/CategoryList.vue';
   import TodoAdd from '@components/TodoAdd.vue';
   import TodoList from '@components/TodoList.vue';
-  import { Link } from '@inertiajs/inertia-vue3';
+  import { Link } from '@inertiajs/vue3';
 
   const props = defineProps<{
-    categories: ICategory[];
-    category?: ICategory | null;
-    todos: ITodo[];
+    categories: Category[];
+    category?: Category | null;
+    todos: Todo[];
   }>();
 
-  const isCurrentCategory = (category: ICategory): boolean => {
-    return category.uuid === props.category?.uuid;
+  const isCurrentCategory = (category: Category): boolean => {
+    return category.id === props.category?.id;
   };
 
   const isAll = (): boolean => !props.category;
@@ -28,14 +28,14 @@
         <ul class="flex flex-wrap items-center justify-start divide-x divide-gray-dark">
           <li
             v-for="category in categories"
-            :key="category.uuid"
+            :key="category.id"
             class="px-2 font-medium first:pl-0"
             :class="{
               'text-blue-light': !isCurrentCategory(category),
               'text-black': isCurrentCategory(category),
             }"
           >
-            <Link :href="`/?category=${category.uuid}`">{{ category.name }}</Link>
+            <Link :href="`/?category=${category.id}`">{{ category.name }}</Link>
           </li>
           <li
             class="pl-2 font-medium"

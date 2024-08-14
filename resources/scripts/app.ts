@@ -1,24 +1,24 @@
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import type { DefineComponent } from 'vue';
+import { createSSRApp, h } from 'vue';
+
+(import.meta as any).glob(['../images/**']);
+
 import '../css/app.css';
 
-import { importPageComponent } from '@/scripts/utils/import-page-component';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
-import { createApp, h } from 'vue';
-
 createInertiaApp({
-  resolve: (name: string) => importPageComponent(`../vue/pages/${name}.vue`, import.meta.glob('../vue/pages/**/*.vue')),
+  resolve: (name: string) =>
+    resolvePageComponent<DefineComponent>(`../vue/pages/${name}.vue`, import.meta.glob<DefineComponent>('../vue/pages/**/*.vue')),
   title: () => 'TODO App',
-  setup({ el, app, props, plugin }) {
-    createApp({ render: () => h(app, props) })
-      .use(plugin)
+  setup({ el, App, props, plugin: inertia }) {
+    createSSRApp({ render: () => h(App, props) })
+      .use(inertia)
       .mount(el);
   },
+  progress: {
+    delay: 100,
+    color: '#3b5ed1',
+    includeCSS: true,
+  },
 });
-
-InertiaProgress.init({
-  delay: 100,
-  color: '#3b5ed1',
-  includeCSS: true,
-});
-
-import.meta.glob(['../images/**']);

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
 
-  type TError = {
+  type Error = {
     title: string;
   };
 
   const errorTypes: {
-    [key: number]: TError;
+    [key: number]: Error;
   } = {
     503: { title: 'Service Unavailable' },
     500: { title: "Sorry, we've encountered an error." },
@@ -19,7 +19,7 @@
     status: number;
   }>();
 
-  const error = computed<TError>(function () {
+  const error = computed<Error>(function () {
     return typeof errorTypes[props.status] !== 'undefined'
       ? errorTypes[props.status]
       : { title: `${props.status}: Oops`, links: true };

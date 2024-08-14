@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
-use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
@@ -19,21 +18,10 @@ class CategoryTest extends TestCase
         $this->assertTrue(
             Schema::hasColumns('categories', [
                 'id',
-                'uuid',
                 'name',
                 'created_at',
                 'updated_at',
             ])
-        );
-    }
-
-    /** @test */
-    public function it_has_valid_uuid()
-    {
-        $category = Category::factory()->create();
-
-        $this->assertTrue(
-            Uuid::isValid($category->uuid)
         );
     }
 

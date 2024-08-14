@@ -10,8 +10,8 @@ use Spatie\LaravelData\Optional;
 class CategoryData extends Data
 {
     public function __construct(
-        #[Uuid()]
-        public string $uuid,
+        #[Uuid]
+        public string $id,
         public string $name,
         #[DataCollectionOf(TodoData::class)]
         public DataCollection|Optional $todos

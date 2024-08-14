@@ -1,11 +1,11 @@
-export interface ICategory {
-  uuid: string;
+export interface Category {
+  id: string;
   name: string;
 }
 
-export interface ITodo {
-  uuid: string;
+export interface Todo {
+  id: string;
   name: string;
   is_complete: boolean;
-  category: ICategory;
+  category: Category;
 }

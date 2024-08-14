@@ -8,15 +8,14 @@ use App\View\DTO\CategoryData;
 use App\View\DTO\TodoData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Illuminate\Support\Collection;
 use Inertia\Response as InertiaResponse;
-use Spatie\LaravelData\DataCollection;
 
 class DashboardController extends Controller
 {
     public function __invoke(Request $request): InertiaResponse
     {
-        return Inertia::render('Dashboard', [
+        return inertia('Dashboard', [
             'todos' => $this->todos($request->query('category')),
             'categories' => $this->categories(),
             'category' => $request->has('category')
@@ -25,37 +24,36 @@ class DashboardController extends Controller
         ]);
     }
 
-    private function category(string $uuid): ?CategoryData
+    private function category(string $id): ?CategoryData
     {
-        $category = Category::whereUuid($uuid)->first();
+        $category = Category::where('id', $id)->first();
 
         return $category ? CategoryData::from($category) : null;
     }
 
     /**
-     * @return DataCollection<TodoData>
+     * @return Collection<TodoData>
      */
-    private function todos(?string $categoryUuid): DataCollection
+    private function todos(?string $categoryId): Collection
     {
-        $categoryData = $categoryUuid ? $this->category($categoryUuid) : null;
+        $categoryData = $categoryId ? $this->category($categoryId) : null;
 
-        return TodoData::collection(
-            Todo::query()
-                ->when($categoryData, function (Builder $t) use ($categoryData): void {
-                    $t->whereHas('category', function (Builder $c) use ($categoryData): void {
-                        $c->whereUuid($categoryData->uuid);
-                    });
-                })
-                ->with('category')
-                ->get()
-        );
+        return Todo::query()
+            ->when($categoryData, function (Builder $t) use ($categoryData): void {
+                $t->whereHas('category', function (Builder $c) use ($categoryData): void {
+                    $c->where('id', $categoryData->id);
+                });
+            })
+            ->with('category')
+            ->get()
+            ->map(fn (Todo $todo) => TodoData::from($todo));
     }
 
     /**
-     * @return DataCollection<CategoryData>
+     * @return Collection<CategoryData>
      */
-    private function categories(): DataCollection
+    private function categories(): Collection
     {
-        return CategoryData::collection(Category::all());
+        return Category::all()->map(fn (Category $category) => CategoryData::from($category));
     }
 }

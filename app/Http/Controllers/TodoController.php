@@ -23,7 +23,7 @@ class TodoController extends Controller
     {
         $this->upsert->handle(TodoData::from([
             ...$request->validated(),
-            'category' => Category::whereUuid($request->category)->first(),
+            'category' => Category::find($request->category),
         ]));
 
         return redirect()->back()->withMessages([

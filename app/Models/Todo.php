@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasUuid;
-use Dyrynda\Database\Casts\EfficientUuid;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Todo extends Model
 {
-    use HasFactory, HasUuid;
+    use HasFactory, HasUuids;
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array<int, string>
      */
     protected $fillable = [
@@ -22,11 +19,10 @@ class Todo extends Model
     ];
 
     /**
-     * @var array<string, mixed>
+     * @var array<string, string|class-string>
      */
     protected $casts = [
         'is_complete' => 'boolean',
-        'uuid' => EfficientUuid::class,
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Models\DTO\CategoryData;
 use App\Models\DTO\TodoData;
 use App\Models\Todo;
 
@@ -23,10 +24,10 @@ class TodoUpsert
 
         $todo->is_complete = $data->is_complete ? 1 : 0;
 
-        if ($data->category) {
+        if ($data->category instanceof CategoryData) {
             $categoryData = $this->categoryUpsert->handle($data->category);
             $todo->category()->associate($categoryData->id);
-        } else {
+        } elseif ($data->category == null) {
             $todo->category()->dissociate();
         }
 

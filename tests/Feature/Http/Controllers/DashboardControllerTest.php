@@ -34,7 +34,7 @@ class DashboardControllerTest extends TestCase
             ->has(Todo::factory()->count(4), 'todos')
             ->create();
 
-        $this->get(route('dashboard', ['category' => Category::first()->uuid]))
+        $this->get(route('dashboard', ['category' => Category::first()->id]))
             ->assertInertia(fn (Assert $page) => $page
                 ->component('Dashboard')
                 ->count('todos', 4)

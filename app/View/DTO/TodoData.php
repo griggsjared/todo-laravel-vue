@@ -8,8 +8,8 @@ use Spatie\LaravelData\Data;
 class TodoData extends Data
 {
     public function __construct(
-        #[Uuid()]
-        public string $uuid,
+        #[Uuid]
+        public string $id,
         public string $name,
         public bool $is_complete,
         public ?CategoryData $category
