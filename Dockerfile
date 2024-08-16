@@ -4,7 +4,7 @@ COPY . /var/www/html
 
 USER root
 
-RUN if [ ! -f /var/www/html/database/database.sqlite ]; then touch /var/www/html/database/database.sqlite; fi
+RUN apk add --update nodejs npm
 
 RUN chown -R www-data:www-data /var/www/html
 
@@ -12,4 +12,4 @@ USER www-data
 
 RUN cd /var/www/html && composer install
 
-RUN cd /var/www/html && php artisan migrate --force
+RUN cd /var/www/html && npm install && npm run build
