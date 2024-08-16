@@ -1,4 +1,4 @@
-FROM serversideup/php:8.3-fpm-nginx-alpine as base
+FROM serversideup/php:8.3-fpm-nginx-alpine
 
 COPY . /var/www/html
 
@@ -11,7 +11,5 @@ RUN chown -R www-data:www-data /var/www/html
 USER www-data
 
 RUN cd /var/www/html && composer install
-
-RUN cd /var/www/html && php artisan key:generate
 
 RUN cd /var/www/html && php artisan migrate --force
