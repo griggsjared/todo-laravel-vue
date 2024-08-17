@@ -14,13 +14,19 @@ COPY docker/web/Caddyfile /etc/caddy/Caddyfile
 COPY docker/web/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/web/php-opocache-cfg.ini /usr/local/etc/php/conf.d/php-opocache-cfg.ini
 
-COPY --chown=www-data:www-data . /var/www/html
+COPY . /var/www/html
+
+RUN touch /var/www/html/database/database.sqlite
+
+RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
-RUN composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader
+RUN composer install --no-interaction --no-progress --no-suggest --optimize-autoloader
 
 RUN npm i && npm run build
+
+RUN php artisan migrate --force --seed
 
 EXPOSE 8080
 
