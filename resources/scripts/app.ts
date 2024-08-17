@@ -3,7 +3,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createSSRApp, h } from 'vue';
 
-(import.meta as any).glob(['../images/**']);
+import.meta.glob(['../images/**']);
 
 import '../css/app.css';
 

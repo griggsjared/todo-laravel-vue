@@ -10,8 +10,6 @@ import { createSSRApp, h } from 'vue';
 const command = new Command();
 command.option('-p, --port <number>', 'port number', '13714').parse();
 
-const siteName: string = 'TODO App';
-
 createServer(
   (page: Page) =>
     createInertiaApp({

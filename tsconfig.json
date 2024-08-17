@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "node"],
-    "typeRoots": ["./node_modules/@types/"],
+    "typeRoots": ["./node_modules"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["resources/*"],
