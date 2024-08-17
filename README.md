@@ -42,9 +42,10 @@ To run js/ts code style fix:
 npx prettier --write .
 ```
 
-Run Docker web container:
+Docker containers:
 ```
-docker run -p 8080:8080 --rm $(docker build -f docker/web/Dockerfile -q -t todo .)
+docker run -it -p 8080:8080 --rm $(docker build -f docker/web/Dockerfile -q  .)
 
+docker run -it --rm $(docker build -f docker/cli/Dockerfile -q  .)
 
 ```
