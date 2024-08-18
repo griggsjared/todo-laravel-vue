@@ -44,8 +44,10 @@ npx prettier --write .
 
 Docker containers:
 ```
-docker run -it -p 8080:8080 --rm $(docker build -f docker/web/Dockerfile -q  .)
+# web container
+docker run -it -p 8080:8080 --rm $(docker build -f docker/web/Dockerfile -q .)
 
-docker run -it --rm $(docker build -f docker/cli/Dockerfile -q  .)
+# cli container
+docker run -it --rm $(docker build -f docker/cli/Dockerfile -q .)
 
 ```
