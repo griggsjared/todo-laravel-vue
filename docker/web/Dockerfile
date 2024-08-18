@@ -13,6 +13,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY docker/web/Caddyfile /etc/caddy/Caddyfile
 COPY docker/web/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/web/php-opocache-cfg.ini /usr/local/etc/php/conf.d/php-opocache-cfg.ini
+COPY docker/web/php-fpm-zzz.conf /usr/local/etc/php-fpm.d/zzz.conf
 
 COPY . /var/www/html
 
