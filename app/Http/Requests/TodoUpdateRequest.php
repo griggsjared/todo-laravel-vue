@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Data\TodoData;
+use App\Models\Category;
+use App\Models\Todo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TodoUpdateRequest extends FormRequest
@@ -18,5 +21,29 @@ class TodoUpdateRequest extends FormRequest
             'is_complete' => ['nullable', 'boolean'],
             'category' => ['nullable', 'uuid', 'exists:categories,uuid'],
         ];
+    }
+
+    public function todo(): Todo
+    {
+        /**
+         * @var Todo $todo
+         */
+        $todo = $this->route('todo');
+
+        return $todo;
+    }
+
+    public function category(): ?Category
+    {
+        return Category::find($this->input('category'));
+    }
+
+    public function todoData(): TodoData
+    {
+        return TodoData::from([
+            ...$this->todo()->toArray(),
+            ...$this->validated(),
+            'category' => $this->category(),
+        ]);
     }
 }

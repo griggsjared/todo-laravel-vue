@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\TodoToggleComplete;
+use App\Actions\TodoUpsert;
 use App\Http\Requests\TodoToggleCompleteRequest;
-use App\Data\TodoData;
 use App\Models\Todo;
 use Illuminate\Http\RedirectResponse;
 
 class TodoToggleCompleteController extends Controller
 {
     public function __construct(
-        private TodoToggleComplete $toggleComplete
+        private TodoUpsert $todoUpsert
     ) {
     }
 
-    public function __invoke(TodoToggleCompleteRequest $request, Todo $todo): RedirectResponse
+    public function __invoke(Todo $todo, TodoToggleCompleteRequest $request): RedirectResponse
     {
-        $this->toggleComplete->handle(
-            TodoData::from($todo),
-            $request->is_complete
+        $this->todoUpsert->handle(
+            $request->todoData(),
         );
 
         return redirect()->back()->withMessages([

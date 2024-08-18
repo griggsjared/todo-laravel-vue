@@ -6,18 +6,11 @@ use App\Data\CategoryData;
 use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryUpdateRequest extends FormRequest
+class CategoryDestroyRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-        ];
     }
 
     public function category(): Category
@@ -34,7 +27,6 @@ class CategoryUpdateRequest extends FormRequest
     {
         return CategoryData::from([
             ...$this->category()->toArray(),
-            ...$this->validated(),
         ]);
     }
 }

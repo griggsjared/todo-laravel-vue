@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Inertia\Response as InertiaResponse;
-use Log;
 
 class DashboardController extends Controller
 {

@@ -7,7 +7,7 @@ use App\Actions\CategoryUpsert;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
-use App\Data\CategoryData;
+use App\Http\Requests\CategoryDestroyRequest;
 use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
@@ -20,7 +20,9 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request): RedirectResponse
     {
-        $this->upsert->handle(CategoryData::from($request->validated()));
+        $this->upsert->handle(
+            $request->categoryData()
+        );
 
         return redirect()->back()->withMessages([
             __('Category has been created.'),
@@ -30,10 +32,7 @@ class CategoryController extends Controller
     public function update(Category $category, CategoryUpdateRequest $request): RedirectResponse
     {
         $this->upsert->handle(
-            CategoryData::from([
-                ...$category->toArray(),
-                ...$request->validated(),
-            ])
+            $request->categoryData()
         );
 
         return redirect()->back()->withMessages([
@@ -41,10 +40,10 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function destroy(Category $category): RedirectResponse
+    public function destroy(Category $category, CategoryDestroyRequest $request): RedirectResponse
     {
         $this->delete->handle(
-            CategoryData::from($category)
+            $request->categoryData()
         );
 
         return redirect()->back()->withMessages([

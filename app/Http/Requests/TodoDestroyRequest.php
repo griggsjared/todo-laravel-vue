@@ -6,18 +6,11 @@ use App\Data\TodoData;
 use App\Models\Todo;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TodoToggleCompleteRequest extends FormRequest
+class TodoDestroyRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
-    }
-
-    public function rules(): array
-    {
-        return [
-            'is_complete' => ['required', 'boolean'],
-        ];
     }
 
     public function todo(): Todo
@@ -34,7 +27,6 @@ class TodoToggleCompleteRequest extends FormRequest
     {
         return TodoData::from([
             ...$this->todo()->toArray(),
-            'is_complete' => $this->boolean('is_complete'),
         ]);
     }
 }

@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Actions\TodoDelete;
 use App\Actions\TodoUpsert;
+use App\Http\Requests\TodoDestroyRequest;
 use App\Http\Requests\TodoStoreRequest;
 use App\Http\Requests\TodoUpdateRequest;
-use App\Models\Category;
-use App\Data\TodoData;
 use App\Models\Todo;
 use Illuminate\Http\RedirectResponse;
 
@@ -21,10 +20,9 @@ class TodoController extends Controller
 
     public function store(TodoStoreRequest $request): RedirectResponse
     {
-        $this->upsert->handle(TodoData::from([
-            ...$request->validated(),
-            'category' => Category::find($request->category),
-        ]));
+        $this->upsert->handle(
+            $request->todoData()
+        );
 
         return redirect()->back()->withMessages([
             __('Todo has been created.'),
@@ -34,11 +32,7 @@ class TodoController extends Controller
     public function update(Todo $todo, TodoUpdateRequest $request): RedirectResponse
     {
         $this->upsert->handle(
-            TodoData::from([
-                ...$todo->toArray(),
-                ...$request->validated(),
-                'category' => Category::whereUuid($request->category)->first(),
-            ])
+            $request->todoData()
         );
 
         return redirect()->back()->withMessages([
@@ -46,9 +40,11 @@ class TodoController extends Controller
         ]);
     }
 
-    public function destroy(Todo $todo): RedirectResponse
+    public function destroy(Todo $todo, TodoDestroyRequest $request): RedirectResponse
     {
-        $this->delete->handle(TodoData::from($todo));
+        $this->delete->handle(
+            $request->todoData()
+        );
 
         return redirect()->back()->withMessages([
             __('Todo has been deleted.'),
