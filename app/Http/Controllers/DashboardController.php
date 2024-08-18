@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ViewData\CategoryViewData;
+use App\Http\ViewData\TodoViewData;
 use App\Models\Category;
 use App\Models\Todo;
-use App\Http\ViewData\CategoryData;
-use App\Http\ViewData\TodoData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -24,15 +24,15 @@ class DashboardController extends Controller
         ]);
     }
 
-    private function category(string $id): ?CategoryData
+    private function category(string $id): ?CategoryViewData
     {
         $category = Category::where('id', $id)->first();
 
-        return $category ? CategoryData::from($category) : null;
+        return $category ? CategoryViewData::from($category) : null;
     }
 
     /**
-     * @return Collection<TodoData>
+     * @return Collection<TodoViewData>
      */
     private function todos(?string $categoryId): Collection
     {
@@ -46,14 +46,14 @@ class DashboardController extends Controller
             })
             ->with('category')
             ->get()
-            ->map(fn (Todo $todo) => TodoData::from($todo));
+            ->map(fn (Todo $todo) => TodoViewData::from($todo));
     }
 
     /**
-     * @return Collection<CategoryData>
+     * @return Collection<CategoryViewData>
      */
     private function categories(): Collection
     {
-        return Category::all()->map(fn (Category $category) => CategoryData::from($category));
+        return Category::all()->map(fn (Category $category) => CategoryViewData::from($category));
     }
 }
