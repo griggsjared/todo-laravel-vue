@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Models\DTO\TodoData;
+use App\Data\TodoData;
 
 class TodoToggleComplete
 {

@@ -3,7 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Category;
-use App\Models\DTO\CategoryData;
+use App\Data\CategoryData;
 
 class CategoryUpsert
 {

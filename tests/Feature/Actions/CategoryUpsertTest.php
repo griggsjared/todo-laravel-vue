@@ -4,7 +4,7 @@ namespace Tests\Feature\Actions;
 
 use App\Actions\CategoryUpsert;
 use App\Models\Category;
-use App\Models\DTO\CategoryData;
+use App\Data\CategoryData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

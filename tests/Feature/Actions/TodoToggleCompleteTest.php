@@ -3,7 +3,7 @@
 namespace Tests\Feature\Actions;
 
 use App\Actions\TodoToggleComplete;
-use App\Models\DTO\TodoData;
+use App\Data\TodoData;
 use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

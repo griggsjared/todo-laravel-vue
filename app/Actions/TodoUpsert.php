@@ -2,8 +2,8 @@
 
 namespace App\Actions;
 
-use App\Models\DTO\CategoryData;
-use App\Models\DTO\TodoData;
+use App\Data\CategoryData;
+use App\Data\TodoData;
 use App\Models\Todo;
 
 class TodoUpsert

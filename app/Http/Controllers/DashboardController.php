@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Todo;
-use App\View\DTO\CategoryData;
-use App\View\DTO\TodoData;
+use App\Http\ViewData\CategoryData;
+use App\Http\ViewData\TodoData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;

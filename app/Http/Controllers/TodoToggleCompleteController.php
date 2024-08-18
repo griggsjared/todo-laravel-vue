@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\TodoToggleComplete;
 use App\Http\Requests\TodoToggleCompleteRequest;
-use App\Models\DTO\TodoData;
+use App\Data\TodoData;
 use App\Models\Todo;
 use Illuminate\Http\RedirectResponse;
 

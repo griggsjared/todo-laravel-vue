@@ -7,7 +7,7 @@ use App\Actions\TodoUpsert;
 use App\Http\Requests\TodoStoreRequest;
 use App\Http\Requests\TodoUpdateRequest;
 use App\Models\Category;
-use App\Models\DTO\TodoData;
+use App\Data\TodoData;
 use App\Models\Todo;
 use Illuminate\Http\RedirectResponse;
 

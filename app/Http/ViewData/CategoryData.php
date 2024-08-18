@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\DTO;
+namespace App\Http\ViewData;
 
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\Validation\Uuid;

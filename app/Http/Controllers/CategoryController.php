@@ -7,7 +7,7 @@ use App\Actions\CategoryUpsert;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
-use App\Models\DTO\CategoryData;
+use App\Data\CategoryData;
 use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
