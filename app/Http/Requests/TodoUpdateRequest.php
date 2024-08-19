@@ -19,7 +19,7 @@ class TodoUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'is_complete' => ['nullable', 'boolean'],
-            'category' => ['nullable', 'uuid', 'exists:categories,uuid'],
+            'category' => ['nullable', 'id', 'exists:categories,id']
         ];
     }
 
