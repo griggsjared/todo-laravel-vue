@@ -13,7 +13,7 @@ RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
-RUN composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader
+RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
 RUN php artisan config:cache
 

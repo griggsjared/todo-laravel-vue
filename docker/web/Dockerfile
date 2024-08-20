@@ -21,11 +21,11 @@ RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
-RUN su www-data -s /bin/sh -c "composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader"
+RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
-RUN su www-data -s /bin/sh -c "npm i && npm run build"
+RUN npm i && npm run build
 
-RUN su www-data -s /bin/sh -c "php artisan view:cache && php artisan config:cache && php artisan route:cache && php artisan queue:restart"
+RUN php artisan view:cache && php artisan config:cache && php artisan route:cache
 
 EXPOSE 8080
 
