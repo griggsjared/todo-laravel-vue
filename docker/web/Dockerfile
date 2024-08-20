@@ -21,10 +21,12 @@ RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
+EXPOSE 8080
+
+USER www-data
+
 RUN composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader
 
 RUN npm i && npm run build
-
-EXPOSE 8080
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

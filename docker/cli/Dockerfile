@@ -13,6 +13,8 @@ RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
+USER www-data
+
 RUN composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader
 
 CMD []
