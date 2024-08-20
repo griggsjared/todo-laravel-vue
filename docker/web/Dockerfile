@@ -23,7 +23,7 @@ RUN composer install --no-dev --no-interaction --no-progress --optimize-autoload
 
 RUN npm i && npm run build
 
-RUN php artisan view:cache && php artisan config:cache && php artisan route:cache
+RUN php artisan config:cache && php artisan route:cache
 
 RUN chown -R www-data:www-data /var/www/html
 
