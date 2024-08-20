@@ -14,6 +14,9 @@ COPY docker/web/Caddyfile /etc/caddy/Caddyfile
 COPY docker/web/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/web/php-opocache-cfg.ini /usr/local/etc/php/conf.d/php-opocache-cfg.ini
 COPY docker/web/php-fpm-zzz.conf /usr/local/etc/php-fpm.d/zzz.conf
+COPY docker/web/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 COPY . /var/www/html
 
@@ -23,10 +26,8 @@ RUN composer install --no-dev --no-interaction --no-progress --optimize-autoload
 
 RUN npm i && npm run build
 
-RUN php artisan view:cache && php artisan route:cache
-
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 8080
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]

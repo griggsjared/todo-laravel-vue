@@ -6,6 +6,9 @@ RUN docker-php-ext-install pdo_mysql \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY docker/web/php-opocache-cfg.ini /usr/local/etc/php/conf.d/php-opocache-cfg.ini
+COPY docker/web/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 COPY . /var/www/html
 
@@ -15,4 +18,4 @@ WORKDIR /var/www/html
 
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
-CMD []
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
