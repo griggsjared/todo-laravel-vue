@@ -25,8 +25,6 @@ RUN composer install --no-dev --no-interaction --no-progress --optimize-autoload
 
 RUN npm i && npm run build
 
-RUN php artisan view:cache && php artisan config:cache && php artisan route:cache
-
 EXPOSE 8080
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
