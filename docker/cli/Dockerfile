@@ -17,4 +17,6 @@ USER www-data
 
 RUN composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader
 
+RUN php artisan config:cache
+
 CMD []
