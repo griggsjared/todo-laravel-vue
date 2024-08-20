@@ -17,13 +17,15 @@ COPY docker/web/php-fpm-zzz.conf /usr/local/etc/php-fpm.d/zzz.conf
 
 COPY . /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html
-
 WORKDIR /var/www/html
 
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
 RUN npm i && npm run build
+
+RUN php artisan view:cache && php artisan config:cache && php artisan route:cache
+
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 8080
 
