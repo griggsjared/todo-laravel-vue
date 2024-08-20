@@ -31,4 +31,6 @@ RUN npm i && npm run build
 
 RUN php artisan view:cache && php artisan config:cache && php artisan route:cache && php artisan queue:restart
 
+USER root
+
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
