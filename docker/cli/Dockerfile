@@ -15,6 +15,4 @@ WORKDIR /var/www/html
 
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
-RUN php artisan config:cache
-
 CMD []
