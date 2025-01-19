@@ -12,7 +12,7 @@ class RefreshDatabaseCommand extends Command
 
     protected $description = 'Refresh the database';
 
-    public function handle()
+    public function handle(): void
     {
         $this->call('migrate:refresh', [
             '--seed' => true,
