@@ -13,6 +13,9 @@ class TodoStoreRequest extends FormRequest
         return true;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         return [
@@ -22,6 +25,7 @@ class TodoStoreRequest extends FormRequest
 
     public function category(): ?Category
     {
+        /** @var Category|null */
         return Category::find($this->input('category'));
     }
 

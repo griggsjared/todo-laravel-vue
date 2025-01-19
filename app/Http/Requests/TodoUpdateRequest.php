@@ -14,20 +14,21 @@ class TodoUpdateRequest extends FormRequest
         return true;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
             'is_complete' => ['nullable', 'boolean'],
-            'category' => ['nullable', 'id', 'exists:categories,id']
+            'category' => ['nullable', 'id', 'exists:categories,id'],
         ];
     }
 
     public function todo(): Todo
     {
-        /**
-         * @var Todo $todo
-         */
+        /** @var Todo $todo */
         $todo = $this->route('todo');
 
         return $todo;
@@ -35,6 +36,7 @@ class TodoUpdateRequest extends FormRequest
 
     public function category(): ?Category
     {
+        /** @var Category|null */
         return Category::find($this->input('category'));
     }
 
