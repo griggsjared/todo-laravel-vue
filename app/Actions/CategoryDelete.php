@@ -2,8 +2,8 @@
 
 namespace App\Actions;
 
-use App\Models\Category;
 use App\Data\CategoryData;
+use App\Models\Category;
 
 class CategoryDelete
 {

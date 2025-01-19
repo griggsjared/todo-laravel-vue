@@ -11,6 +11,5 @@ class CategoryData extends Data
         #[Uuid]
         public ?string $id,
         public string $name,
-    ) {
-    }
+    ) {}
 }

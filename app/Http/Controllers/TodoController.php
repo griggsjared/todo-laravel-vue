@@ -15,8 +15,7 @@ class TodoController extends Controller
     public function __construct(
         private TodoUpsert $upsert,
         private TodoDelete $delete,
-    ) {
-    }
+    ) {}
 
     public function store(TodoStoreRequest $request): RedirectResponse
     {

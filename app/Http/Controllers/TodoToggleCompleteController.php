@@ -11,8 +11,7 @@ class TodoToggleCompleteController extends Controller
 {
     public function __construct(
         private TodoUpsert $todoUpsert
-    ) {
-    }
+    ) {}
 
     public function __invoke(Todo $todo, TodoToggleCompleteRequest $request): RedirectResponse
     {

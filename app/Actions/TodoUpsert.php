@@ -10,8 +10,7 @@ class TodoUpsert
 {
     public function __construct(
         private CategoryUpsert $categoryUpsert
-    ) {
-    }
+    ) {}
 
     public function handle(TodoData $data): TodoData
     {
