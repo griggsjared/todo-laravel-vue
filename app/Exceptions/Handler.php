@@ -49,11 +49,9 @@ class Handler extends ExceptionHandler
         });
     }
 
-    /**
-     * @return void
-     */
     public function render($request, Throwable $e)
     {
+        /** @var \Illuminate\Http\Response */
         $response = parent::render($request, $e);
 
         if (! app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {

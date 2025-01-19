@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use Spatie\LaravelData\Attributes\Validation\Uuid;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
 

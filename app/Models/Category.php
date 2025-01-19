@@ -12,7 +12,7 @@ class Category extends Model
     use HasFactory, HasUuids;
 
     /**
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
