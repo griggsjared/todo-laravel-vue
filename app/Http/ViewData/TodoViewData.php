@@ -13,6 +13,5 @@ class TodoViewData extends Data
         public string $name,
         public bool $is_complete,
         public ?CategoryViewData $category
-    ) {
-    }
+    ) {}
 }

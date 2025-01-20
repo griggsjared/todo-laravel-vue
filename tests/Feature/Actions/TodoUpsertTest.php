@@ -3,9 +3,9 @@
 namespace Tests\Feature\Actions;
 
 use App\Actions\TodoUpsert;
-use App\Models\Category;
 use App\Data\CategoryData;
 use App\Data\TodoData;
+use App\Models\Category;
 use App\Models\Todo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

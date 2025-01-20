@@ -11,6 +11,5 @@ class CategoryViewData extends Data
         #[Uuid]
         public string $id,
         public string $name
-    ) {
-    }
+    ) {}
 }

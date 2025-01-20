@@ -14,6 +14,5 @@ class TodoData extends Data
         public string $name,
         public ?bool $is_complete,
         public Optional|CategoryData|null $category
-    ) {
-    }
+    ) {}
 }

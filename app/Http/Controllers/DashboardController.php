@@ -30,7 +30,7 @@ class DashboardController extends Controller
 
     private function category(?string $id): ?CategoryViewData
     {
-        if(!$id) {
+        if (! $id) {
             return null;
         }
 
